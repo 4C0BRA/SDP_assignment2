@@ -1,0 +1,63 @@
+@startuml
+title Part B - Abstract Factory (UI components)
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+class DeliveryApplication <<Client>> {
+  -guiFactory: GUIFactory
+  -logistics: Logistics
+  +DeliveryApplication(guiFactory, logistics)
+  +run(cargo: String, destination: String)
+  -renderInterface()
+}
+abstract class Logistics
+
+interface GUIFactory <<AbstractFactory>> {
+  +createButton(): Button
+  +createCheckbox(): Checkbox
+}
+interface Button <<AbstractProductA>> {
+  +paint()
+}
+interface Checkbox <<AbstractProductB>> {
+  +paint()
+}
+
+package "Windows family" {
+  class WindowsFactory <<ConcreteFactory>> {
+    +createButton(): Button
+    +createCheckbox(): Checkbox
+  }
+  class WindowsButton <<ConcreteProduct>>
+  class WindowsCheckbox <<ConcreteProduct>>
+}
+
+package "macOS family" {
+  class MacOSFactory <<ConcreteFactory>> {
+    +createButton(): Button
+    +createCheckbox(): Checkbox
+  }
+  class MacOSButton <<ConcreteProduct>>
+  class MacOSCheckbox <<ConcreteProduct>>
+}
+
+DeliveryApplication --> GUIFactory : constructor injection
+DeliveryApplication ..> Button : uses
+DeliveryApplication ..> Checkbox : uses
+DeliveryApplication --> Logistics : constructor injection
+
+GUIFactory ..> Button : returns
+GUIFactory ..> Checkbox : returns
+
+GUIFactory <|.. WindowsFactory
+GUIFactory <|.. MacOSFactory
+Button <|.. WindowsButton
+Button <|.. MacOSButton
+Checkbox <|.. WindowsCheckbox
+Checkbox <|.. MacOSCheckbox
+
+WindowsFactory ..> WindowsButton : creates
+WindowsFactory ..> WindowsCheckbox : creates
+MacOSFactory ..> MacOSButton : creates
+MacOSFactory ..> MacOSCheckbox : creates
+@enduml

@@ -1,0 +1,69 @@
+=== Check 1: ROAD + WINDOWS
+$ java -cp out com.assignment2.app.Main ROAD WINDOWS
+Delivery mode: ROAD
+UI platform: WINDOWS
+Rendering Windows button
+Rendering Windows checkbox
+Truck delivers laboratory equipment to Aktau warehouse by road
+[exit code: 0]
+
+=== Check 2: SEA + WINDOWS
+$ java -cp out com.assignment2.app.Main SEA WINDOWS
+Delivery mode: SEA
+UI platform: WINDOWS
+Rendering Windows button
+Rendering Windows checkbox
+Ship delivers laboratory equipment to Aktau warehouse by sea
+[exit code: 0]
+
+=== Check 3: ROAD + MACOS
+$ java -cp out com.assignment2.app.Main ROAD MACOS
+Delivery mode: ROAD
+UI platform: MACOS
+Rendering macOS button
+Rendering macOS checkbox
+Truck delivers laboratory equipment to Aktau warehouse by road
+[exit code: 0]
+
+=== Check 4: SEA + MACOS
+$ java -cp out com.assignment2.app.Main SEA MACOS
+Delivery mode: SEA
+UI platform: MACOS
+Rendering macOS button
+Rendering macOS checkbox
+Ship delivers laboratory equipment to Aktau warehouse by sea
+[exit code: 0]
+
+=== Check 5: unsupported delivery mode, valid platform
+$ java -cp out com.assignment2.app.Main AIR WINDOWS
+Unsupported delivery mode: 'AIR'. Supported: ROAD, SEA.
+Input ended or was invalid. Stopping without running anything.
+[exit code: 1]
+
+=== Check 6: unsupported platform, valid delivery mode
+$ java -cp out com.assignment2.app.Main ROAD LINUX
+Unsupported UI platform: 'LINUX'. Supported: WINDOWS, MACOS.
+Input ended or was invalid. Stopping without running anything.
+[exit code: 1]
+
+=== Missing input: only one argument
+$ java -cp out com.assignment2.app.Main ROAD
+Expected two arguments: <ROAD|SEA> <WINDOWS|MACOS>, but got 1.
+[exit code: 1]
+
+=== Missing input: no arguments, empty stdin
+$ java -cp out com.assignment2.app.Main < /dev/null
+Delivery mode (ROAD or SEA): 
+No input received.
+Input ended or was invalid. Stopping without running anything.
+[exit code: 1]
+
+=== Interactive: invalid answer, then valid answers
+$ printf 'boat\nsea\nmacos\n' | java -cp out com.assignment2.app.Main
+Delivery mode (ROAD or SEA): Unsupported value: 'boat'. Try again.
+Delivery mode (ROAD or SEA): UI platform (WINDOWS or MACOS): Delivery mode: SEA
+UI platform: MACOS
+Rendering macOS button
+Rendering macOS checkbox
+Ship delivers laboratory equipment to Aktau warehouse by sea
+[exit code: 0]

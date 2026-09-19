@@ -1,0 +1,44 @@
+@startuml
+title Part A - Factory Method (logistics)
+skinparam classAttributeIconSize 0
+
+interface Transport <<Product>> {
+  +deliver(cargo: String, destination: String)
+}
+class Truck <<ConcreteProduct>> {
+  +deliver(cargo: String, destination: String)
+}
+class Ship <<ConcreteProduct>> {
+  +deliver(cargo: String, destination: String)
+}
+
+abstract class Logistics <<Creator>> {
+  #{abstract} createTransport(): Transport
+  +planDelivery(cargo: String, destination: String)
+}
+class RoadLogistics <<ConcreteCreator>> {
+  #createTransport(): Transport
+}
+class SeaLogistics <<ConcreteCreator>> {
+  #createTransport(): Transport
+}
+
+class DeliveryApplication <<Client>> {
+  +run(cargo: String, destination: String)
+}
+
+Transport <|.. Truck
+Transport <|.. Ship
+Logistics <|-- RoadLogistics
+Logistics <|-- SeaLogistics
+Logistics ..> Transport : uses (calls deliver)
+RoadLogistics ..> Truck : creates
+SeaLogistics ..> Ship : creates
+DeliveryApplication --> Logistics : calls planDelivery()
+
+note bottom of Logistics
+  planDelivery():
+    Transport t = createTransport();
+    t.deliver(cargo, destination);
+end note
+@enduml
