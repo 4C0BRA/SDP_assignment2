@@ -12,8 +12,8 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class Main {
-    private static final String SAMPLE_CARGO = "laboratory equipment";
-    private static final String SAMPLE_DESTINATION = "Aktau warehouse";
+    private static final String SAMPLE_CARGO = "cinema equipment";
+    private static final String SAMPLE_DESTINATION = "Baku warehouse";
 
     public static void main(String[] args) {
         Optional<DeliveryMode> mode;
