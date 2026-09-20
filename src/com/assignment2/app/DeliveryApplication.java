@@ -5,12 +5,7 @@ import com.assignment2.gui.Checkbox;
 import com.assignment2.gui.GUIFactory;
 import com.assignment2.logistics.Logistics;
 
-/**
- * Client of both patterns. It knows only the abstract types
- * (GUIFactory, Button, Checkbox, Logistics), never a concrete class.
- */
 public class DeliveryApplication {
-
     private final GUIFactory guiFactory;
     private final Logistics logistics;
 

@@ -11,17 +11,7 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.Function;
 
-/**
- * Startup: validates the two independent choices, picks the concrete creator and
- * factory, and hands them to DeliveryApplication.
- *
- * Usage:   java com.assignment2.app.Main [ROAD|SEA] [WINDOWS|MACOS]
- * Without arguments the choices are asked on the console (asked again when invalid).
- * With a wrong number of arguments or an unsupported value the program prints a
- * message and stops with exit code 1. There is no silent default.
- */
 public class Main {
-
     private static final String SAMPLE_CARGO = "laboratory equipment";
     private static final String SAMPLE_DESTINATION = "Aktau warehouse";
 
@@ -85,7 +75,6 @@ public class Main {
         }
     }
 
-    /** Asks again until the answer is valid; returns empty when the input stream ends. */
     private static <T> Optional<T> askUntilValid(Scanner console, String question, Function<String, Optional<T>> parser) {
         while (true) {
             System.out.print(question);
